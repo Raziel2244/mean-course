@@ -6,7 +6,7 @@ const postsRoutes = require('./routes/posts');
 
 const app = express();
 
-mongoose.connect("mongodb+srv://node:mHwTylQ4VrMG3rIG@cluster0-jffrs.gcp.mongodb.net/test?retryWrites=true")
+mongoose.connect("mongodb+srv://node:mHwTylQ4VrMG3rIG@cluster0-jffrs.gcp.mongodb.net/test?retryWrites=true", { useNewUrlParser: true })
   .then(() => {
     console.log('Connected to database!')
   }).catch(() => {

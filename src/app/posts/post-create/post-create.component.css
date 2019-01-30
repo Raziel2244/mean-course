@@ -9,3 +9,16 @@ textarea {
 mat-spinner {
   margin: auto;
 }
+
+#img-preview {
+  height: 36px;
+  position: static;
+  box-sizing: border-box;
+  vertical-align: top;
+  border-radius: 2px;
+  margin-left: 15px;
+}
+
+#btn-save {
+  float: right;
+}

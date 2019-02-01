@@ -32,7 +32,9 @@ const storage = multer.diskStorage({
 
 router.post(
   "",
-  multer({ storage: storage }).single("image"),
+  multer({
+    storage: storage
+  }).single("image"),
   (req, res, next) => {
     const url = req.protocol + "://" + req.get("host");
     const post = new Post({
@@ -54,7 +56,9 @@ router.post(
 
 router.put(
   "/:id",
-  multer({ storage: storage }).single("image"),
+  multer({
+    storage: storage
+  }).single("image"),
   (req, res, next) => {
     let imagePath = req.body.imagePath;
     if (req.file) {
@@ -68,17 +72,34 @@ router.put(
       imagePath: imagePath
     });
     console.log(post);
-    Post.updateOne({ _id: req.params.id }, post).then(result => {
-      res.status(200).json({ message: "Update succesful!" });
+    Post.updateOne({
+        _id: req.params.id
+      },
+      post
+    ).then(result => {
+      res.status(200).json({
+        message: "Update succesful!"
+      });
     });
   }
 );
 
 router.get("", (req, res, next) => {
-  Post.find().then(documents => {
+  const pageSize = +req.query.pagesize;
+  const currentPage = +req.query.page;
+  const postQuery = Post.find();
+  let fetchedPosts;
+  if (pageSize && currentPage) {
+    postQuery.skip(pageSize * (currentPage - 1)).limit(pageSize);
+  }
+  postQuery.then(documents => {
+    fetchedPosts = documents;
+    return Post.countDocuments();
+  }).then(count => {
     res.status(200).json({
       message: "Posts fetched successfully!",
-      posts: documents
+      posts: fetchedPosts,
+      totalPosts: count
     });
   });
 });
@@ -88,15 +109,21 @@ router.get("/:id", (req, res, next) => {
     if (post) {
       res.status(200).json(post);
     } else {
-      res.status(404).json({ message: "Post not found!" });
+      res.status(404).json({
+        message: "Post not found!"
+      });
     }
   });
 });
 
 router.delete("/:id", (req, res, next) => {
-  Post.deleteOne({ _id: req.params.id }).then(result => {
+  Post.deleteOne({
+    _id: req.params.id
+  }).then(result => {
     console.log(result);
-    res.status(200).json({ message: "Post deleted!" });
+    res.status(200).json({
+      message: "Post deleted!"
+    });
   });
 });
 

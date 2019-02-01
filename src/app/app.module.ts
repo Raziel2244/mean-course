@@ -8,6 +8,7 @@ import {
   MatCardModule,
   MatExpansionModule,
   MatInputModule,
+  MatPaginatorModule,
   MatProgressSpinnerModule,
   MatToolbarModule
 } from '@angular/material';
@@ -34,6 +35,7 @@ import { PostListComponent } from './posts/post-list/post-list.component';
     MatCardModule,
     MatExpansionModule,
     MatInputModule,
+    MatPaginatorModule,
     MatProgressSpinnerModule,
     MatToolbarModule,
     AppRoutingModule

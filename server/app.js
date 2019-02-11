@@ -4,13 +4,15 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 const postsRoutes = require("./routes/posts");
+const authRoutes = require('./routes/auth');
 
 const app = express();
 
 mongoose
   .connect(
-    "mongodb+srv://node:mHwTylQ4VrMG3rIG@cluster0-jffrs.gcp.mongodb.net/test?retryWrites=true",
-    { useNewUrlParser: true }
+    "mongodb+srv://node:mHwTylQ4VrMG3rIG@cluster0-jffrs.gcp.mongodb.net/test?retryWrites=true", {
+      useNewUrlParser: true
+    }
   )
   .then(() => {
     console.log("Connected to database!");
@@ -20,7 +22,9 @@ mongoose
   });
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: "false" }));
+app.use(bodyParser.urlencoded({
+  extended: "false"
+}));
 app.use("/images", express.static(path.join("server/images")));
 
 app.use((req, res, next) => {
@@ -37,5 +41,6 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/posts", postsRoutes);
+app.use("/api/auth", authRoutes);
 
 module.exports = app;

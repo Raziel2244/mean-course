@@ -11,14 +11,15 @@ import { NgForm } from '@angular/forms';
 export class SignupComponent implements OnInit {
   isLoading = false;
 
-  constructor(public authService: AuthService) {}
+  constructor(public authService: AuthService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   onSignup(form: NgForm) {
     if (form.invalid) {
       return;
     }
+    this.isLoading = true;
     this.authService.createUser(form.value.email, form.value.password);
   }
 }

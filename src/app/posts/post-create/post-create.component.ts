@@ -24,7 +24,7 @@ export class PostCreateComponent implements OnInit {
   constructor(
     public postsService: PostsService,
     public route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -48,7 +48,8 @@ export class PostCreateComponent implements OnInit {
             id: postData._id,
             title: postData.title,
             content: postData.content,
-            imagePath: postData.imagePath
+            imagePath: postData.imagePath,
+            creator: postData.creator
           };
           this.form.setValue({
             title: this.post.title,

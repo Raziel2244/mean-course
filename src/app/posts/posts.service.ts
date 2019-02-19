@@ -34,7 +34,6 @@ export class PostsService {
         })
       )
       .subscribe(mappedPostData => {
-        console.log(mappedPostData);
         this.posts = mappedPostData.posts;
         this.postsUpdated.next({ posts: [...this.posts], postCount: mappedPostData.totalPosts });
       });

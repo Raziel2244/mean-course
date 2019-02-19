@@ -3,7 +3,10 @@ import { Injectable } from "@angular/core";
 import { Post } from "./post.model";
 import { Router } from "@angular/router";
 import { Subject } from "rxjs";
+import { environment } from "../../environments/environment"
 import { map } from "rxjs/operators";
+
+const SERVER_URL = environment.apiUrl + "/posts/";
 
 @Injectable({ providedIn: "root" })
 export class PostsService {
@@ -16,7 +19,7 @@ export class PostsService {
     const queryParams = `?pagesize=${postsPerPage}&page=${currentPage}`;
     this.http
       .get<{ message: string; posts: any, totalPosts: number }>(
-        "http://localhost:3000/api/posts" + queryParams
+        SERVER_URL + queryParams
       )
       .pipe(
         map(postData => {
@@ -50,7 +53,7 @@ export class PostsService {
       content: string;
       imagePath: string;
       creator: string;
-    }>("http://localhost:3000/api/posts/" + id);
+    }>(SERVER_URL + id);
   }
 
   addPost(title: string, content: string, image: File) {
@@ -59,13 +62,8 @@ export class PostsService {
     postData.append("content", content);
     postData.append("image", image, title);
     this.http
-      .post<{ message: string; post: Post }>(
-        "http://localhost:3000/api/posts",
-        postData
-      )
-      .subscribe(responseData => {
-        this.router.navigate(["/"]);
-      });
+      .post<{ message: string; post: Post }>(SERVER_URL, postData)
+      .subscribe(() => { this.router.navigate(["/"]); });
   }
 
   updatePost(id: string, title: string, content: string, image: File | string) {
@@ -86,14 +84,14 @@ export class PostsService {
       };
     }
     this.http
-      .put("http://localhost:3000/api/posts/" + id, postData)
-      .subscribe(response => {
+      .put(SERVER_URL + id, postData)
+      .subscribe(() => {
         this.router.navigate(["/"]);
       });
   }
 
   deletePost(postId: string) {
     return this.http
-      .delete("http://localhost:3000/api/posts/" + postId);;
+      .delete(SERVER_URL + postId);;
   }
 }

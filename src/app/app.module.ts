@@ -4,7 +4,6 @@ import { AngularMaterialModule } from "./angular-material.module";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { AuthInterceptor } from "./auth/auth-interceptor";
-import { AuthModule } from './auth/auth.module';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { BrowserModule } from "@angular/platform-browser";
 import { ErrorComponent } from "./error/error.component";
@@ -25,8 +24,7 @@ import { PostsModule } from "./posts/posts.module";
     BrowserModule,
     HttpClientModule,
     AngularMaterialModule,
-    PostsModule,
-    AuthModule
+    PostsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

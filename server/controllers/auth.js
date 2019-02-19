@@ -50,7 +50,7 @@ exports.userLogin = (req, res) => {
           email: fetchedUser.email,
           userId: fetchedUser._id
         },
-        "ntJSXNPYeSVojmFTtNxVG0CzBMQvn4cOe9nFck59KUOcVh7q5kZGKisq2vWaDleT",
+        process.env.JWT_SECRET,
         {
           expiresIn: "1h"
         }

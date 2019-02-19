@@ -1,0 +1,8 @@
+{
+  "env": {
+    "MONGO_ATLAS_USER": "node",
+    "MONGO_ATLAS_PASS": "mHwTylQ4VrMG3rIG",
+    "MONGO_ATLAS_URL": "cluster0-jffrs.gcp.mongodb.net/test?retryWrites=true",
+    "JWT_SECRET": "ntJSXNPYeSVojmFTtNxVG0CzBMQvn4cOe9nFck59KUOcVh7q5kZGKisq2vWaDleT"
+  }
+}
